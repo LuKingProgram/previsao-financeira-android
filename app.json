@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Previsão Financeira",
+    "slug": "previsao-financeira-android",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "previsaofinanceira",
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package": "com.lukingprogram.previsaofinanceira",
+      "versionCode": 1,
+      "backgroundColor": "#F7F5EF",
+      "adaptiveIcon": {
+        "backgroundColor": "#F7F5EF",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F7F5EF"
+        }
+      ],
+      [
+        "expo-sqlite",
+        {
+          "useSQLCipher": true
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

@@ -1,0 +1,45 @@
+name: Funcionalidade
+description: Propor ou detalhar uma entrega do roadmap.
+title: "[feature] "
+labels:
+  - type:feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Consulte o PRD, a arquitetura e as regras financeiras antes de descrever a entrega.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Necessidade
+      description: Que problema da pessoa usuária esta entrega resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo
+      description: O que deve ser incluído e o que fica fora?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      description: Liste comportamentos que possam ser verificados.
+      placeholder: |
+        - Dado ...
+        - Quando ...
+        - Então ...
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Dados e privacidade
+      description: Quais dados são lidos, gravados ou enviados? Se nada for enviado, diga isso.
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependências e documentos
+      description: Liste issues bloqueadoras e documentos que precisam mudar.
