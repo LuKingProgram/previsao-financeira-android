@@ -107,3 +107,8 @@ A development migration and sender were prepared for owner-scoped, immutable ope
 ## Account isolation for queued operations
 
 The draft submit RPC verifies that the authenticated owner matches the expected owner supplied by the adapter before storing an operation. The app must still bind each device queue durably to an authenticated user and stop on account changes; it must not invoke the sender until that binding is implemented. The migration remains unreviewed and untested in Supabase.
+
+
+## Android test interface
+
+The savings section displays a selected month instead of twelve stacked cards. The month follows the summary period; realized and projected savings rates remain calculated from savings divided by income, and movements remain accessible. The user-approved image is configured as the Android launcher and adaptive foreground icon. This is a test build; synchronization and local encryption are not implemented.

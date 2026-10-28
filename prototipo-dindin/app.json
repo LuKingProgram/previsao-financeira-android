@@ -13,7 +13,12 @@
       "typedRoutes": true
     },
     "android": {
-      "package": "com.lukingprogram.dindin"
-    }
+      "package": "com.lukingprogram.dindin",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/dindin-app-icon.png",
+        "backgroundColor": "#00442a"
+      }
+    },
+    "icon": "./assets/images/dindin-app-icon.png"
   }
 }
