@@ -1,6 +1,7 @@
 import 'react-native-url-polyfill/auto';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
+import { AppState, Platform } from 'react-native';
 
 let client: SupabaseClient | undefined;
 
@@ -31,5 +32,14 @@ export function getSupabaseClient(): SupabaseClient {
     },
   });
 
+  if (Platform.OS !== 'web') {
+    AppState.addEventListener('change', (state) => {
+      if (state === 'active') client?.auth.startAutoRefresh();
+      else client?.auth.stopAutoRefresh();
+    });
+    if (AppState.currentState === 'active') client.auth.startAutoRefresh();
+  }
+
   return client;
 }
+
