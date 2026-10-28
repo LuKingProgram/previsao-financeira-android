@@ -99,6 +99,14 @@ A locally generated test APK was built with the Android SDK using a short, isola
 The synchronization coordinator serializes overlapping calls for the same queue instance and leaves operations pending when sending or local acknowledgement fails. Retrying an acknowledged-but-not-recorded operation requires a server adapter that implements idempotency for operation IDs. These are unit-tested coordinator behaviors; the queue is not yet connected to Supabase and encryption, authenticated ownership, conflict resolution, recovery and device verification remain incomplete.
 
 
+## Development Supabase project status (2026-10-28)
+
+- The isolated `dindin-dev` project exists in the free `Din Din Desenvolvimento` organization, in the São Paulo region. Its project reference is `iizanlsfrxuzrrewoaqq`.
+- Email sign-in and email confirmation are enabled. Public sign-up is disabled; anonymous sign-in and manual account linking are disabled. The email provider has secure email and password changes enabled. Default Auth rate limits remain in place.
+- The project was created with the Data API enabled, automatic exposure of new tables disabled, and automatic RLS enabled for new public tables. These defaults do not replace reviewed grants, policies, and authorization tests.
+- No app user, database migration, redirect URL, or app environment configuration has been completed. The default site URL is still `http://localhost:3000`; do not use password recovery until a verified app callback exists.
+- The free project currently reports no backups. Use fictitious data only. Before real data, verify backup and restore, account deletion, and migration/RLS tests.
+
 ## Supabase operation log draft
 
 A development migration and sender were prepared for owner-scoped, immutable operations and idempotent retries. They have not been applied or tested against PostgreSQL or RLS and are not connected to the app. Authentication, encrypted local storage, migration of existing data, remote download/recovery, conflict handling, account deletion and device validation remain incomplete. Do not use with real financial data.
@@ -112,3 +120,4 @@ The draft submit RPC verifies that the authenticated owner matches the expected 
 ## Android test interface
 
 The savings section displays a selected month instead of twelve stacked cards. The month follows the summary period; realized and projected savings rates remain calculated from savings divided by income, and movements remain accessible. The user-approved image is configured as the Android launcher and adaptive foreground icon. This is a test build; synchronization and local encryption are not implemented.
+
