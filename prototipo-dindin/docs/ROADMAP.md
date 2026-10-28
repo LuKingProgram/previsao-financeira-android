@@ -122,3 +122,7 @@ The draft submit RPC verifies that the authenticated owner matches the expected 
 
 The savings section displays a selected month instead of twelve stacked cards. The month follows the summary period; realized and projected savings rates remain calculated from savings divided by income, and movements remain accessible. The user-approved image is configured as the Android launcher and adaptive foreground icon. This is a test build; synchronization and local encryption are not implemented.
 
+## Account sign-in implementation
+
+The app now has a test-account screen in Settings. It supports email/password sign-in, verified session display, and local-device sign-out through the Supabase adapter. The session uses SecureStore and refreshes while the app is active. The screen is unavailable when the build has no public Supabase URL and publishable key. Sign-in is not yet connected to the local ledger, so it does not protect or synchronize existing movements. Password recovery, an app callback URL, email delivery, account-scoped local data migration, RLS integration tests, and a device build remain pending. Do not label the previous APK as containing this screen.
+
