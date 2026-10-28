@@ -10,6 +10,8 @@ export default function SettingsRoute() {
       onBackToSummary={() => router.replace('/')}
       onShowMovements={() => router.push('/movements')}
       onAdd={() => router.push('/new-movement')}
+      onAccount={() => router.push('/account')}
     />
   );
 }
+
