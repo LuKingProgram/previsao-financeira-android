@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Din Din",
+    "slug": "din-din",
+    "version": "1.0.0",
+    "scheme": "dindin",
+    "userInterfaceStyle": "dark",
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "android": {
+      "package": "com.lukingprogram.dindin"
+    }
+  }
+}
