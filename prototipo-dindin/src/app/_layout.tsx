@@ -14,6 +14,7 @@ function AppStack() {
         <Stack.Screen name="index" />
         <Stack.Screen name="movements" />
         <Stack.Screen name="settings" />
+        <Stack.Screen name="account" />
         <Stack.Screen name="new-movement" options={{ presentation: 'modal' }} />
       </Stack>
     </>
@@ -29,3 +30,4 @@ export default function RootLayout() {
     </AppThemeProvider>
   );
 }
+
