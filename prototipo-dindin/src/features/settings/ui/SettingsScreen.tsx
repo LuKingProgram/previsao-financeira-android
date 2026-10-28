@@ -9,6 +9,7 @@ export interface SettingsScreenProps {
   readonly onBackToSummary: () => void;
   readonly onShowMovements: () => void;
   readonly onAdd: () => void;
+  readonly onAccount: () => void;
 }
 
 const themeOptions: readonly { readonly value: ThemeMode; readonly label: string }[] = [
@@ -20,6 +21,7 @@ export function SettingsScreen({
   onBackToSummary,
   onShowMovements,
   onAdd,
+  onAccount,
 }: SettingsScreenProps) {
   const { mode, setMode, colors } = useAppTheme();
   const styles = createStyles(colors);
@@ -40,6 +42,11 @@ export function SettingsScreen({
         </View>
 
         <DemoBanner />
+
+        <Pressable accessibilityRole="button" onPress={onAccount} style={styles.section}>
+          <Text accessibilityRole="header" style={styles.sectionTitle}>Conta de teste</Text>
+          <Text style={styles.description}>Entrar ou sair do Supabase. Os lançamentos locais ainda não sincronizam.</Text>
+        </Pressable>
 
         <View style={styles.section}>
           <Text accessibilityRole="header" style={styles.sectionTitle}>Aparência</Text>
@@ -120,3 +127,4 @@ function createStyles(colors: ReturnType<typeof useAppTheme>['colors']) {
     note: { color: colors.muted, fontSize: 12, lineHeight: 17 },
   });
 }
+
