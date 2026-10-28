@@ -36,6 +36,8 @@ export interface SavingsProgressSectionProps {
   readonly onChangeYear: (year: number) => void;
   readonly onSelectYear?: (year: number) => void;
   readonly onSelectMonth: (month: number) => void;
+  readonly selectedMonth: number;
+  readonly onChangeMonth: (month: number) => void;
 }
 
 function formatMoney(cents: number): string {
@@ -199,8 +201,11 @@ export function SavingsProgressSection({
   onChangeYear,
   onSelectYear,
   onSelectMonth,
+  selectedMonth,
+  onChangeMonth,
 }: SavingsProgressSectionProps) {
   const { colors } = useAppTheme();
+  const selectedSavings = summary.months.find((item) => item.month === selectedMonth);
   const canGoToPreviousYear = summary.year > 1;
   const canGoToNextYear = summary.year < 9999;
 
@@ -248,17 +253,21 @@ export function SavingsProgressSection({
       <Text accessibilityRole="header" style={[styles.sectionTitle, { color: colors.text }]}>
         Evolução mensal
       </Text>
-      <View style={styles.monthList}>
-        {summary.months.map(({ month, savings }) => (
-          <MonthCard
-            key={month}
-            year={summary.year}
-            month={month}
-            summary={savings}
-            onPress={() => onSelectMonth(month)}
-          />
-        ))}
+      <View style={[styles.yearSelector, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+        <Pressable accessibilityRole="button" accessibilityLabel="Mês anterior das economias"
+          disabled={selectedMonth <= 1} onPress={() => onChangeMonth(selectedMonth - 1)} style={styles.yearButton}>
+          <Text style={[styles.yearButtonText, { color: selectedMonth <= 1 ? colors.muted : colors.text }]}>‹</Text>
+        </Pressable>
+        <Text style={[styles.year, { color: colors.text }]}>{MONTH_NAMES[selectedMonth - 1]}</Text>
+        <Pressable accessibilityRole="button" accessibilityLabel="Próximo mês das economias"
+          disabled={selectedMonth >= 12} onPress={() => onChangeMonth(selectedMonth + 1)} style={styles.yearButton}>
+          <Text style={[styles.yearButtonText, { color: selectedMonth >= 12 ? colors.muted : colors.text }]}>›</Text>
+        </Pressable>
       </View>
+      {selectedSavings && (
+        <MonthCard year={summary.year} month={selectedMonth} summary={selectedSavings.savings}
+          onPress={() => onSelectMonth(selectedMonth)} />
+      )}
     </View>
   );
 }
@@ -299,8 +308,8 @@ const styles = StyleSheet.create({
   summaryCard: {
     borderRadius: 18,
     borderWidth: 1,
-    gap: 16,
-    padding: 18,
+    gap: 12,
+    padding: 16,
   },
   cardTitle: {
     fontSize: 18,
@@ -352,13 +361,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 8,
   },
-  monthList: {
-    gap: 12,
-  },
   monthCard: {
     borderRadius: 16,
     borderWidth: 1,
-    gap: 14,
+    gap: 10,
     padding: 16,
   },
   monthTitle: {

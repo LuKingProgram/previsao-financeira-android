@@ -190,6 +190,8 @@ export function MonthlySummaryScreen({
 
         <SavingsProgressSection
           summary={annualSavings}
+          selectedMonth={period.month}
+          onChangeMonth={(month) => setPeriod((current) => ({ ...current, month }))}
           onChangeYear={(year) => setPeriod((current) => ({ ...current, year }))}
           onSelectYear={(year) => onOpenPeriod({ year, month: 1, scope: 'year' })}
           onSelectMonth={(month) => onOpenPeriod({ year: period.year, month, scope: 'month' })}

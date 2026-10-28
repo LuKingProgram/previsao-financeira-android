@@ -18,13 +18,14 @@ create policy ledger_insert_own on public.ledger_operations for insert to authen
   with check (owner_id = (select auth.uid()));
 
 -- Retry the same operation safely; reject an operation ID reused for different data.
-create function public.submit_ledger_operation(p_operation_id text, p_movement_id text, p_payload jsonb)
+create function public.submit_ledger_operation(p_expected_owner uuid, p_operation_id text, p_movement_id text, p_payload jsonb)
 returns void language plpgsql security invoker set search_path = '' as $$
 declare
   current_user_id uuid := auth.uid();
   saved public.ledger_operations%rowtype;
 begin
   if current_user_id is null then raise exception 'Authentication required'; end if;
+  if current_user_id is distinct from p_expected_owner then raise exception 'Account mismatch'; end if;
   if p_payload->>'id' is distinct from p_movement_id then raise exception 'Movement ID mismatch'; end if;
   insert into public.ledger_operations (owner_id, operation_id, movement_id, payload)
     values (current_user_id, p_operation_id, p_movement_id, p_payload)
@@ -36,5 +37,5 @@ begin
   end if;
 end;
 $$;
-revoke all on function public.submit_ledger_operation(text,text,jsonb) from public, anon;
-grant execute on function public.submit_ledger_operation(text,text,jsonb) to authenticated;
+revoke all on function public.submit_ledger_operation(uuid,text,text,jsonb) from public, anon;
+grant execute on function public.submit_ledger_operation(uuid,text,text,jsonb) to authenticated;

@@ -102,3 +102,8 @@ The synchronization coordinator serializes overlapping calls for the same queue 
 ## Supabase operation log draft
 
 A development migration and sender were prepared for owner-scoped, immutable operations and idempotent retries. They have not been applied or tested against PostgreSQL or RLS and are not connected to the app. Authentication, encrypted local storage, migration of existing data, remote download/recovery, conflict handling, account deletion and device validation remain incomplete. Do not use with real financial data.
+
+
+## Account isolation for queued operations
+
+The draft submit RPC verifies that the authenticated owner matches the expected owner supplied by the adapter before storing an operation. The app must still bind each device queue durably to an authenticated user and stop on account changes; it must not invoke the sender until that binding is implemented. The migration remains unreviewed and untested in Supabase.

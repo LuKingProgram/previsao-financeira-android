@@ -5,13 +5,13 @@ const entry = { operationId: 'op1', movement: { id: 'm1', date: '2026-01-01', am
 
 test('sends a stable operation and movement to the RPC', async () => {
   const rpc = jest.fn().mockResolvedValue({ error: null });
-  const sender = createLedgerSender({ rpc } as unknown as SupabaseClient);
+  const sender = createLedgerSender({ rpc } as unknown as SupabaseClient, 'owner-1');
   await sender.send(entry);
-  expect(rpc).toHaveBeenCalledWith('submit_ledger_operation', { p_operation_id: 'op1', p_movement_id: 'm1', p_payload: entry.movement });
+  expect(rpc).toHaveBeenCalledWith('submit_ledger_operation', { p_expected_owner: 'owner-1', p_operation_id: 'op1', p_movement_id: 'm1', p_payload: entry.movement });
 });
 
 test('propagates remote errors so the queue cannot acknowledge them', async () => {
   const error = new Error('connection lost');
-  const sender = createLedgerSender({ rpc: jest.fn().mockResolvedValue({ error }) } as unknown as SupabaseClient);
+  const sender = createLedgerSender({ rpc: jest.fn().mockResolvedValue({ error }) } as unknown as SupabaseClient, 'owner-1');
   await expect(sender.send(entry)).rejects.toBe(error);
 });
