@@ -104,7 +104,8 @@ The synchronization coordinator serializes overlapping calls for the same queue 
 - The isolated `dindin-dev` project exists in the free `Din Din Desenvolvimento` organization, in the São Paulo region. Its project reference is `iizanlsfrxuzrrewoaqq`.
 - Email sign-in and email confirmation are enabled. Public sign-up is disabled; anonymous sign-in and manual account linking are disabled. The email provider has secure email and password changes enabled. Default Auth rate limits remain in place.
 - The project was created with the Data API enabled, automatic exposure of new tables disabled, and automatic RLS enabled for new public tables. These defaults do not replace reviewed grants, policies, and authorization tests.
-- No app user, database migration, redirect URL, or app environment configuration has been completed. The default site URL is still `http://localhost:3000`; do not use password recovery until a verified app callback exists.
+- An owner test user was created and marked confirmed in Supabase Auth; no successful app sign-in has been verified. Do not record its email or password in this repository.
+- No database migration, redirect URL, or app environment configuration has been completed. The default site URL is still `http://localhost:3000`; do not send an invitation or use password recovery until a verified app callback and suitable email delivery exist.
 - The free project currently reports no backups. Use fictitious data only. Before real data, verify backup and restore, account deletion, and migration/RLS tests.
 
 ## Supabase operation log draft
