@@ -4,7 +4,7 @@ Product decisions are recorded in `PRODUCT_DECISIONS.md`. The offline requiremen
 
 ## Current foundation
 
-The repository uses Expo Router, React Native, and strict TypeScript. `src/app/` owns route files and layout composition. The current routes compose a clearly labeled, fictional in-memory prototype; its state is not written to a database or local storage.
+The repository uses Expo Router, React Native, and strict TypeScript. `src/app/` owns route files and layout composition. Financial movements currently persist in local SQLite with a durable pending queue; the queue is not connected to Supabase. The test-account screen uses a separate Supabase Auth adapter. Authentication does not yet scope or protect local financial data.
 
 ## Proposed module boundaries
 
@@ -40,6 +40,7 @@ Feature modules own their domain rules. Route files compose feature screens. Fea
 
 ## Current product boundary and deferred decisions
 
-The financial metrics behavior is approved and recorded in `FINANCIAL_METRICS.md`; its pure calculation module does not depend on Expo, Supabase, or the UI. Summary, movement-list, manual-entry, and settings prototype screens are in place. A financial repository and durable queue remain to be implemented and verified.
+The financial metrics behavior is approved and recorded in `FINANCIAL_METRICS.md`; its pure calculation module does not depend on Expo, Supabase, or the UI. Summary, movement-list, manual-entry, settings, and test-account screens are in place. The local repository and durable queue exist; account binding, remote synchronization, recovery, conflict handling, and encryption remain to be implemented and verified.
 
 The first release is for one person's finances and will use a backend from the start. A shared household remains a later phase. Supabase is the selected initial backend; its Auth, generated data API, Postgres, and RLS avoid operating a separate custom server. Financial data synchronization still requires the product decisions listed in `API.md` before implementation.
+
